@@ -1,8 +1,5 @@
-import React from "react";
 import {
   Box,
-  Heading,
-  Text,
   FormControl,
   FormLabel,
   Button,
@@ -12,22 +9,13 @@ import {
   SimpleGrid,
   HStack,
 } from "@chakra-ui/react";
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-  FormikHelpers,
-  useFormikContext,
-} from "formik"; // Import Formik components
+import { Formik, Form, Field, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import Input from "../../components/input";
-import CustomText from "../../components/Topography/Text";
 import CustomHeading2 from "../../components/Topography/Heading2";
 import CustomHeading from "../../components/Topography/Heading1";
 import useMessageStore from "../../zustand/messageStore";
-import useAxios, { Base_Url } from "../../hooks/api";
-import { error } from "console";
+import { Base_Url } from "../../hooks/api";
 import useLoadingStore from "../../zustand/globalLoadingState";
 import axios from "axios";
 
@@ -55,7 +43,6 @@ const schema = Yup.object().shape({
 
 const CreateCompany = () => {
   const { setError, setMessage } = useMessageStore();
-  const { client } = useAxios();
   const { loading, setLoading } = useLoadingStore();
 
   const onSubmit = async (
@@ -67,7 +54,7 @@ const CreateCompany = () => {
       email: values?.companyEmail,
       password: values?.companyPassword,
       companyName: values?.companyName,
-      planDuration: values?.planDuration,
+      planDuration: Number(values?.planDuration),
       price: Number(values?.planPrice),
       allocatedEmp: Number(values?.employeeAllocated),
       planDescription: values?.planInclude,
@@ -231,8 +218,9 @@ const CreateCompany = () => {
                       h={"54px"}
                       size="lg"
                     >
-                      <option value={"1"}>1 Month</option>
-                      <option value={"2"}>2 Month</option>
+                      <option value={"30"}>1 Month</option>
+                      <option value={"60"}>2 Month</option>
+                      <option value={"90"}>3 Month</option>
                     </Select>
 
                     <FormErrorMessage>

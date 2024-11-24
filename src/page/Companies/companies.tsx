@@ -1,13 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Column } from "react-table";
-import ImageAndName from "../../components/imageAndName";
+import React, { useEffect, useState } from "react";
 import WrapperCard from "../../components/Cards/WrapperCard";
-import { Comapny } from "./CompanyList/data";
-import { useNavigate } from "react-router-dom";
-import MyTable from "../../components/Table/Table";
-import formatDate from "../../hooks/getDate";
-import { Box, HStack, IconButton } from "@chakra-ui/react";
-import { MdDelete } from "react-icons/md";
+import { Box } from "@chakra-ui/react";
 import useLoadingStore from "../../zustand/globalLoadingState";
 import axios from "axios";
 import { Base_Url } from "../../hooks/api";

@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import {
   Box,
   Flex,
@@ -8,9 +7,7 @@ import {
   Heading,
   FormControl,
   FormLabel,
-  HStack,
 } from "@chakra-ui/react";
-import { SiJira } from "react-icons/si";
 import Colors from "../../constants/colors";
 import loginimg from "../../assets/login_logo.png";
 import * as Yup from "yup";
@@ -18,7 +15,7 @@ import Input from "../../components/input";
 import useMessageStore from "../../zustand/messageStore";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import useLoadingStore from "../../zustand/globalLoadingState";
-import useAxios, { Base_Url } from "../../hooks/api";
+import { Base_Url } from "../../hooks/api";
 import axios from "axios";
 
 const schema = Yup.object().shape({
@@ -33,7 +30,6 @@ interface FormValues {
 
 const Login = () => {
   const { setError, setMessage } = useMessageStore();
-  const { client, updateToken } = useAxios();
   const { loading, setLoading } = useLoadingStore();
 
   const onSubmit = async (
@@ -47,7 +43,6 @@ const Login = () => {
         if (res?.data?.data && res?.data?.status) {
           localStorage.setItem("token", res?.data.token);
           localStorage.setItem("@userData", res?.data.data);
-          updateToken(res?.data?.token);
           setMessage("Logged in successfully");
         }
       })
