@@ -50,6 +50,6 @@ export const companyColumn: columnsSchema[] = [
   },
   {
     label: "Active",
-    key: "isActive",
+    key: "status",
   },
 ];

@@ -1,14 +1,32 @@
-import { Table, Thead, Tbody, Tr, Th, Td, HStack } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  HStack,
+  Button,
+  IconButton,
+  Switch,
+} from "@chakra-ui/react";
 import CustomText from "../../../components/Topography/Text";
 import Colors from "../../../constants/colors";
 import formatDate from "../../../hooks/getDate";
 import { Comapny, companyColumn } from "./data";
+import { FaTrash } from "react-icons/fa";
 
 interface ComapnyTableProps {
   companyData: Comapny[];
+  handleDelete: (companyId: string) => void;
+  handleUpdateStatus: (companyId: string, status: boolean) => void;
 }
 
-const CompanyTable: React.FC<ComapnyTableProps> = ({ companyData }) => {
+const CompanyTable: React.FC<ComapnyTableProps> = ({
+  companyData,
+  handleDelete,
+  handleUpdateStatus,
+}) => {
   return (
     <Table variant="striped" colorScheme="primary">
       <Thead>
@@ -23,6 +41,20 @@ const CompanyTable: React.FC<ComapnyTableProps> = ({ companyData }) => {
               {column.label}
             </Th>
           ))}
+          <Th
+            {...tableHeaderStyle}
+            color={Colors.PRIMARY[300]}
+            backgroundColor={Colors.PRIMARY[200]}
+          >
+            Status
+          </Th>
+          <Th
+            {...tableHeaderStyle}
+            color={Colors.PRIMARY[300]}
+            backgroundColor={Colors.PRIMARY[200]}
+          >
+            Action
+          </Th>
         </Tr>
       </Thead>
       <Tbody>
@@ -46,7 +78,7 @@ const CompanyTable: React.FC<ComapnyTableProps> = ({ companyData }) => {
                     formatDate(user[column.key] as string)
                   ) : column.key === "planDuration" ? (
                     user[column.key] / 30 + " Month"
-                  ) : column.key === "isActive" ? (
+                  ) : column.key === "status" ? (
                     user[column.key] ? (
                       "Yes"
                     ) : (
@@ -57,6 +89,22 @@ const CompanyTable: React.FC<ComapnyTableProps> = ({ companyData }) => {
                   )}
                 </Td>
               ))}
+              <Td {...tableHeaderStyle}>
+                <Switch
+                  isChecked={user.status}
+                  onChange={() => handleUpdateStatus(user._id, !user.status)}
+                  colorScheme="teal"
+                />
+              </Td>
+              <Td {...tableHeaderStyle}>
+                <IconButton
+                  aria-label="Delete Company"
+                  icon={<FaTrash />}
+                  colorScheme="red"
+                  onClick={() => handleDelete(user._id)}
+                  size="sm"
+                />
+              </Td>
             </Tr>
           ))}
       </Tbody>
