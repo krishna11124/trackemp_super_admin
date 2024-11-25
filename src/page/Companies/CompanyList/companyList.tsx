@@ -45,7 +45,7 @@ const CompanyTable: React.FC<ComapnyTableProps> = ({ companyData }) => {
                   ) : column.key === "expiryDate" ? (
                     formatDate(user[column.key] as string)
                   ) : column.key === "planDuration" ? (
-                    user[column.key] + " Month"
+                    user[column.key] / 30 + " Month"
                   ) : column.key === "isActive" ? (
                     user[column.key] ? (
                       "Yes"

@@ -286,7 +286,7 @@ const MobileNav = ({ onOpen, ...rest }: any) => {
                   ml="2"
                 >
                   <Text fontSize="sm" w="150px">
-                    Welocme, Krihsna
+                    Welocme, Krishna
                   </Text>
                   <Text fontSize="xs" color="gray.600" w="150px">
                     Super Admin
